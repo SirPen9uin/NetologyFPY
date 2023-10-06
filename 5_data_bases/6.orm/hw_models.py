@@ -4,6 +4,7 @@ import sqlalchemy
 import sqlalchemy as sq
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from dotenv import load_dotenv
+import psycopg2
 
 load_dotenv()
 DSN = os.getenv('MY_DSN')
