@@ -14,3 +14,6 @@
 2) [Работа с SQL из Python](https://github.com/SirPen9uin/NetologyFPY/blob/main/5_data_bases/5.psycopg/hw_db_personal_info.py)
 
 3) [ORM](https://github.com/SirPen9uin/NetologyFPY/tree/main/5_data_bases/6.orm)
+
+### Профессиональная работа с Python
+1) [Импорты,модули, пакеты](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6.1_modules_packeges_imports)
