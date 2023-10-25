@@ -1,75 +1,87 @@
+from pprint import pprint
 import csv
-import operator
-from pprint import pprint as pp
 import re
+import operator
 import itertools
+import os
+import sys
 
-def get_contact_dict(file_name):
-    with open(file_name, encoding="utf-8") as f:
-        rows = csv.reader(f, delimiter=",")
-        contacts_list = list(rows)
 
-    new_contact_list = []
-    keys = contacts_list[0]
-    values = contacts_list[1:]
-    for num, vals in enumerate(values):
-        new_contact_list.append({})
-        for key, val in zip(keys, vals):
-            new_contact_list[num].update({key: val})
-    return new_contact_list
 
-def phone_format(file_name, new_file_name):
-    with open(file_name, encoding="utf-8") as f:
+def read_csv_to_dict(file_name):
+    contacts_dict = []
+    with open(file_name, encoding="utf8") as f:
+        reader = csv.reader(f, delimiter=",")
+        contacts_list = list(reader)
+
+        keys = contacts_list[0]
+        values = contacts_list[1:]
+        for num, vals in enumerate(values):
+            contacts_dict.append({})
+            for key, val in zip(keys, vals):
+                contacts_dict[num].update({key: val})
+
+        return contacts_dict
+
+
+def write_dicts_to_file(file_name, dicts):
+    keys = list(dicts[0].keys())
+    # print(keys)
+    with open(file_name, "w", encoding="utf8") as f:
+        datawriter = csv.writer(f, delimiter=',')
+        datawriter.writerow(keys)
+        for d in dicts:
+            # for v in d.values():
+            datawriter.writerow(d.values())
+
+
+def fix_phones(filename, new_filename):
+    with open(filename, encoding="utf8") as f:
         text = f.read()
 
     pattern_phone = r'(\+7|8)?\s*\(?(\d{3})\)?[\s*-]?(\d{3})[\s*-]?(\d{2})[\s*-]?(\d{2})(\s*)\(?(доб\.?)?\s*(\d*)?\)?'
     fixed_phones = re.sub(pattern_phone, r'+7(\2)\3-\4-\5\6\7\8', text)
-    # return fixed_phones
-    with open(new_file_name, 'w+', encoding="utf8") as f:
+    with open(new_filename, 'w+', encoding="utf8") as f:
         text = f.write(fixed_phones)
 
-def name_fixes(file_name):
-    contacts_list = get_contact_dict(file_name)
-    for contact in contacts_list:
-        splited_contact = contact['lastname'].split(' ')
-        if len(splited_contact) > 1:
-            contact['lastname'] = splited_contact[0]
-            contact['firstname'] = splited_contact[1]
+def fix_names(filename):
+    contacts_dict = read_csv_to_dict(filename)
+    for v in contacts_dict:
+        splt = v['lastname'].split(' ')
+        if len(splt) > 1:
+            v['lastname'] = splt[0]
+            v['firstname'] = splt[1]
+            if len(splt) > 2:
+                v['surname'] = splt[2]
 
-        splited_contact = contact['firstname'].split(' ')
-        if len(splited_contact) > 1:
-            contact['firstname'] = splited_contact[0]
-            contact['surname'] = splited_contact[1]
-    return contacts_list
+        splt = v['firstname'].split(' ')
+        if len(splt) > 1:
+            v['firstname'] = splt[0]
+            v['surname'] = splt[1]
+    return contacts_dict
 
-def new_contact_book(contacts):
-    keys = set(contacts[0].keys())
-    groups = ['firstname', 'lastname']
-    group = operator.itemgetter(*groups)
-    cols = operator.itemgetter(*(keys^set(groups)))
+def merge_names(contacts):
+    all_keys = set(contacts[0].keys())
+    group_list = ['firstname', 'lastname']
+    group = operator.itemgetter(*group_list)
+    cols = operator.itemgetter(*(all_keys ^ set(group_list)))
     contacts.sort(key=group)
-    grouped_contacts = itertools.groupby(contacts, group)
+    grouped = itertools.groupby(contacts, group)
 
-    contacts_data = []
-    for (firstname, lastname), g in grouped_contacts:
-        contacts_data.append({'lastname': lastname, 'firstname': firstname})
-        for el in g:
-            e1 = contacts_data[-1]
-            for k, v in el.items():
-                if k not in e1 or e1[k] == '':
-                    e1[k] = v
-    return contacts_data
+    merge_data = []
+    for (firstname, lastname), g in grouped:
+        merge_data.append({'lastname': lastname, 'firstname': firstname})
+        for gr in g:
+            d1 = merge_data[-1]
+            for k, v in gr.items():
+                if k not in d1 or d1[k] == '':
+                    d1[k] = v
 
-def write_new_contacts(file_name, dicts):
-    keys = list(dicts[0].keys())
-    with open(file_name, 'w', encoding='utf8') as f:
-        datawriter = csv.writer(f, delimiter=',')
-        datawriter.writerow(keys)
-        for dict in dicts:
-            datawriter.writerow(dict.values())
+    return merge_data
 
 if __name__ == '__main__':
-    phone_format(file_name='phonebook_raw.csv', new_file_name='fixed_phonebook.csv')
-    fixed_names = name_fixes(file_name='fixed_phonebook.csv')
-    new_contact_book = new_contact_book(fixed_names)
-    write_new_contacts('new_phonebook.csv', new_contact_book)
+    fix_phones('phonebook_raw.csv', 'fixed_phones.csv')
+    fix_names = fix_names('fixed_phones.csv')
+    os.remove('fixed_phones.csv')
+    merge_names = merge_names(fix_names)
+    write_dicts_to_file('phonebook.csv', merge_names)
