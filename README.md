@@ -17,3 +17,4 @@
 
 ### Профессиональная работа с Python
 1) [Импорты,модули, пакеты](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6.1_modules_packeges_imports)
+2) [Регулярные выражения](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6.2_regular_expressions)
