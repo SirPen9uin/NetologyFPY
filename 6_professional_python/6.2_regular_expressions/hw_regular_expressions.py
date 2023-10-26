@@ -40,17 +40,17 @@ def fix_phones(filename, new_filename):
 
 def fix_names(filename):
     contacts_dict = read_csv_to_dict(filename)
-    for v in contacts_dict:
-        splt = v['lastname'].split(' ')
-        if len(splt) > 1:
-            v['lastname'] = splt[0]
-            v['firstname'] = splt[1]
-            if len(splt) > 2:
-                v['surname'] = splt[2]
-        splt = v['firstname'].split(' ')
-        if len(splt) > 1:
-            v['firstname'] = splt[0]
-            v['surname'] = splt[1]
+    for contact in contacts_dict:
+        splited_lastname = contact['lastname'].split(' ')
+        if len(splited_lastname) > 1:
+            contact['lastname'] = splited_lastname[0]
+            contact['firstname'] = splited_lastname[1]
+            if len(splited_lastname) > 2:
+                contact['surname'] = splited_lastname[2]
+        splited_firstname = contact['firstname'].split(' ')
+        if len(splited_firstname) > 1:
+            contact['firstname'] = splited_firstname[0]
+            contact['surname'] = splited_firstname[1]
     return contacts_dict
 
 def merge_names(contacts):
