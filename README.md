@@ -19,3 +19,4 @@
 1) [Импорты,модули, пакеты](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6.1_modules_packeges_imports)
 2) [Регулярные выражения](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6.2_regular_expressions)
 3) [Web-Scrapping](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6.3_web_scrapping)
+4) [Итераторы, генераторы](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6.4_iterators_generators_yield)
