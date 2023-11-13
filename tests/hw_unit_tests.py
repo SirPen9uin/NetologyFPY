@@ -1,5 +1,5 @@
 from unittest import TestCase
-from hw_data import same_names, unique_names, top_names
+from hw_tests_data import same_names, unique_names, top_names
 
 
 class TestDataCollections(TestCase):
