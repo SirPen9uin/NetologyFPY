@@ -21,3 +21,6 @@
 3) [Web-Scrapping](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6.3_web_scrapping)
 4) [Итераторы, генераторы](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6.4_iterators_generators_yield)
 5) [Декораторы](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6.5_decorators)
+6) [Tests - директория с тестами](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_6_tests/tests)
+   [Tests - файл с данными для тестов по коллекциям данных](https://github.com/SirPen9uin/NetologyFPY/blob/main/hw_tests_data.py)
+   [Tests - файл с данными для тестов по API Яндекса](https://github.com/SirPen9uin/NetologyFPY/blob/main/hw_tests_yaapi.py)
