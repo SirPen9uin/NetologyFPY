@@ -24,3 +24,4 @@
 6) [Tests - директория с тестами](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_6_tests/tests)
    [Tests - файл с данными для тестов по коллекциям данных](https://github.com/SirPen9uin/NetologyFPY/blob/main/hw_tests_data.py)
    [Tests - файл с данными для тестов по API Яндекса](https://github.com/SirPen9uin/NetologyFPY/blob/main/hw_tests_yaapi.py)
+7) [Подготовка к интервью](https://github.com/SirPen9uin/NetologyFPY/tree/main/6_professional_python/6_7_interview)
