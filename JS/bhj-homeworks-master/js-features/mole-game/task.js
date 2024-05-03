@@ -1,7 +1,5 @@
 const dead = document.getElementById('dead');
 const lost = document.getElementById('lost');
-let time = 1000;
-let place = 1;
 
 let counterDead = 0;
 let counterLost = 0;
