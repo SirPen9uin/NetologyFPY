@@ -17,6 +17,16 @@ class Game {
   }
 
   registerEvents() {
+    console.log(this.currentSymbol.textContent);
+    document.addEventListener('keypress', (e) => {
+      console.log(e.key);
+      if (e.key === 'Shift' || e.key === 'Control') return;
+      else if (e.key.toLowerCase() === this.currentSymbol.textContent.toLowerCase()) {
+        return this.success();
+      } else {
+        return this.fail();
+      }
+    })
     /*
       TODO:
       Написать обработчик события, который откликается
