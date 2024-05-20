@@ -1,3 +1,5 @@
+let dropdown = document.querySelectorAll('.dropdown');
+console.log(dropdown);
 let dropdownValue = document.querySelector('.dropdown__value');
 let dropdownList = document.querySelector('.dropdown__list');
 
