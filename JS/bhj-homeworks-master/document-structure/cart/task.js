@@ -1,45 +1,35 @@
-const products = document.querySelectorAll('.product');
-const cart = document.querySelector('.cart');
-
-products.forEach(product => {
-  const id = product.getAttribute('data-id');
-  const quantityControls = product.querySelector('.product__quantity-controls');
-  const quantityValue = quantityControls.querySelector('.product__quantity-value');
-
-  quantityControls.addEventListener('click', event => {
-    const target = event.target;
-    if (target.classList.contains('product__quantity-control_dec')) {
-      if (quantityValue.textContent > 1) {
-        quantityValue.textContent--;
-      }
-    } else if (target.classList.contains('product__quantity-control_inc')) {
-      quantityValue.textContent++;
+const plus = document.getElementsByClassName('product__quantity-control product__quantity-control_inc')
+const minus = document.getElementsByClassName('product__quantity-control product__quantity-control_dec')
+const quantity = document.getElementsByClassName('product__quantity-value')
+const add = document.getElementsByClassName('product__add')
+const products = document.getElementsByClassName('product')
+const images = document.getElementsByClassName('product__image')
+const cart = document.querySelector('.cart__products')
+let arryId = []
+for (let i = 0; i< plus.length; i++){
+    plus[i].onclick = () => {
+    quantity[i].textContent = Number(quantity[i].textContent)+1
     }
-  });
-
-  product.addEventListener('click', () => {
-    let cartProduct = cart.querySelector(`[data-id="${id}"]`);
-    if (!cartProduct) {
-      cartProduct = document.createElement('div');
-      cartProduct.classList.add('cart__product');
-      cartProduct.setAttribute('data-id', id);
-      cart.appendChild(cartProduct);
+    minus[i].onclick = () => {
+        if (quantity[i].textContent > 1){
+            quantity[i].textContent = Number(quantity[i].textContent)-1
+        }
     }
-    const image = product.querySelector('.product__image');
-    const imageSrc = image.getAttribute('src');
-    const cartProductImage = cartProduct.querySelector('.cart__product-image');
-    if (!cartProductImage) {
-      cartProductImage = document.createElement('img');
-      cartProductImage.classList.add('cart__product-image');
-      cartProductImage.setAttribute('src', imageSrc);
-      cartProduct.appendChild(cartProductImage);
+    add[i].onclick = () => {
+        const cartCount = document.querySelectorAll('.cart__product-count')
+        const productInCart = document.querySelectorAll('.cart__product')
+        console.log(products[i].getAttribute('data-id'))
+        
+        if (arryId.includes(products[i].getAttribute('data-id') ) ) {
+            cartCount[i].textContent = Number(cartCount[i].textContent) + Number(quantity[i].textContent)
+        }
+        else {
+        cart.innerHTML +=  
+       `<div class="cart__product" data-id="${products[i].getAttribute('data-id')}">
+           <img class="cart__product-image" src="${images[i].getAttribute('src')}">
+           <div class="cart__product-count">${quantity[i].textContent}</div>
+       </div>`
+        }
+        arryId.push(products[i].getAttribute('data-id'))
     }
-    const cartProductCount = cartProduct.querySelector('.cart__product-count');
-    if (!cartProductCount) {
-      cartProductCount = document.createElement('div');
-      cartProductCount.classList.add('cart__product-count');
-      cartProduct.appendChild(cartProductCount);
-    }
-    cartProductCount.textContent = parseInt(cartProductCount.textContent) + parseInt(quantityValue.textContent);
-  });
-});
+}
