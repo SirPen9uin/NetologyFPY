@@ -8,3 +8,14 @@ textarea {
   border: 1px solid #e2e2e2;
   box-sizing: border-box;
 }
+
+.btn {
+  font-family: Golos, Arial, sans-serif;
+  display: block;
+  color: blueviolet;
+  background-color: #fff;
+  border: solid 1px blueviolet;
+  border-radius: 25%;
+  cursor: pointer;
+  margin: auto;
+}
