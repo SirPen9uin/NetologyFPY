@@ -47,10 +47,7 @@ class PreviewModal extends BaseModal {
    * Отрисовывает изображения в блоке всплывающего окна
    */
   showImages(data) {
-    let dataRevers = data['items'].reverse().filter(el => el['media_type'] == 'image');
-    let imagesList = [];
-    dataRevers.forEach(el => imagesList.push(this.getImageInfo(el)));
-    this.content.innerHTML = imagesList.join('');
+
   }
   /**
    * Форматирует дату в формате 2021-12-30T20:40:02+00:00(строка)
