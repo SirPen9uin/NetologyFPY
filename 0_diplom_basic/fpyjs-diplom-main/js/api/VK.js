@@ -6,7 +6,7 @@
  * */
 class VK {
 
-  static ACCESS_TOKEN = 'vk1.a.ge3wdgFDLpvXJnrMwNVseVb6zkelZcNXo5m6Mb14rsojFf_HhJ0DvseNgTQJlGLwQWq6Ev-quaxik_u7dswo7fHomiznc5yD-nTOPElKldkO9s7zED238Py-Af0CSAEXAPMlroAYCUBMjFoif-r-_moEhHG74_AYMCQp9KD0pwhH-CGMaGPiqa0cE1N4OkK6m-RsYX-L3CCwrjqyIU5IdQ';
+  static ACCESS_TOKEN = '';
   static lastCallback;
 
   /**
