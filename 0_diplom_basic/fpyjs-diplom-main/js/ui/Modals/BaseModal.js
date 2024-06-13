@@ -3,8 +3,8 @@
  * Используется как базовый класс всплывающего окна
  */
 class BaseModal {
-  constructor( element ) {
-    this.element = element
+  constructor(element) {
+    this.element = element;
   }
 
   /**
